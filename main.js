@@ -45,8 +45,9 @@ function modalLoded(){
 }
 
 function gotposes(results){
+  console.log(results.length);
   if(results.length>0){
-    rightwristY = results[0].pose.rightWrist.y;
+    rightwristY = results[0].pose.rightWrist.y-30;
     rightwristX = results[0].pose.rightWrist.x;
     scorerightwrist = results[0].pose.keypoints[10].score;
     console.log(scorerightwrist);
@@ -159,11 +160,14 @@ function move(){
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5;
     playerscore++;
+    ball_touch_paddle.play();
+
   }
   else{
     pcscore++;
     reset();
     navigator.vibrate(100);
+    missed.play();
   }
 }
 if(pcscore ==4){
